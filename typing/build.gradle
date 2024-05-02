@@ -5,11 +5,18 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://www.jetbrains.com/intellij-repository/releases'
+    }
 }
 
 dependencies {
     implementation libs.groovy.all
     implementation libs.objectweb.asm
+
+    compileOnly 'com.jetbrains.intellij.platform:core:241.15989.157'
+    compileOnly 'com.jetbrains.intellij.java:java-psi:241.15989.155'
+    compileOnly 'com.jetbrains.intellij.groovy:groovy-psi:241.15989.155'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
