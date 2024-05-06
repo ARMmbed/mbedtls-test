@@ -640,7 +640,7 @@ def gen_coverity_push_jobs() {
     return jobs
 }
 
-def gen_release_jobs(BranchInfo info, String label_prefix='', boolean run_examples=true) {
+Map<String, Closure> gen_release_jobs(BranchInfo info, String label_prefix='', boolean run_examples=true) {
     def jobs = [:]
 
     if (env.RUN_BASIC_BUILD_TEST == "true") {

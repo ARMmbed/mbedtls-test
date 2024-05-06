@@ -99,14 +99,14 @@ void node_record_timestamps(String node_label, String job_name, Callable<Void> b
     record_timestamps(node_label, job_name, body, node_label)
 }
 
-void record_inner_timestamps(String group, String job_name, Callable<Void> body) {
+def <T> T record_inner_timestamps(String group, String job_name, Callable<T> body) {
     def ts = timestamps[group][job_name]
     if (ts == null) {
         throw new NoSuchElementException(job_name)
     }
     ts.innerStart = System.currentTimeMillis()
     try {
-        body()
+        return body()
     } finally {
         ts.innerEnd = System.currentTimeMillis()
     }
