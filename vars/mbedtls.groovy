@@ -17,6 +17,7 @@
  *  This file is part of Mbed TLS (https://www.trustedfirmware.org/projects/mbed-tls/)
  */
 
+import groovy.transform.TypeChecked
 
 import hudson.model.Cause
 import hudson.model.Result
@@ -145,6 +146,7 @@ def run_job() {
     run_pr_job()
 }
 
+@TypeChecked(extensions=['org.mbed.tls.jenkins.typing.JenkinsTypingExtension'])
 void run_release_job() {
     BranchInfo info
     analysis.main_record_timestamps('run_release_job') {

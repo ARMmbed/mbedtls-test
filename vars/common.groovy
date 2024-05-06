@@ -38,6 +38,7 @@ import org.jenkinsci.plugins.github_branch_source.Connector
 import org.kohsuke.github.GHPermissionType
 
 import org.mbed.tls.jenkins.BranchInfo
+import org.mbed.tls.jenkins.typing.NeedsNodeContext
 
 /* Indicates if CI is running on Open CI (hosted on https://ci.trustedfirmware.org/) */
 @Field is_open_ci_env = env.JENKINS_URL ==~ /\S+(trustedfirmware)\S+/
@@ -187,6 +188,7 @@ def init_docker_images() {
     }
 }
 
+@NeedsNodeContext
 def get_docker_image(platform) {
     def docker_image = get_docker_tag(platform)
     for (int attempt = 1; attempt <= 3; attempt++) {

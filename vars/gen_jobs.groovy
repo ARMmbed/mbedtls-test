@@ -21,10 +21,11 @@ import java.util.concurrent.Callable
 
 import groovy.transform.Field
 
-import net.sf.json.JSONObject
 import hudson.AbortException
+import net.sf.json.JSONObject
 
 import org.mbed.tls.jenkins.BranchInfo
+import org.mbed.tls.jenkins.typing.NodeContext
 
 // Keep track of builds that fail.
 // Use static field, so the is content preserved across stages.
@@ -37,7 +38,7 @@ private Map<String, Callable<Void>> job(String label, Callable<Void> body) {
     return Collections.singletonMap(label, body)
 }
 
-private Map<String, Callable<Void>> instrumented_node_job(String node_label, String job_name, Callable<Void> body) {
+private Map<String, Callable<Void>> instrumented_node_job(String node_label, String job_name, @DelegatesTo(NodeContext) Callable<Void> body) {
     return job(job_name) {
         analysis.node_record_timestamps(node_label, job_name, body)
     }
